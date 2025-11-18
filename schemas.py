@@ -13,6 +13,7 @@ Model name is converted to lowercase for the collection name:
 
 from pydantic import BaseModel, Field
 from typing import Optional
+from datetime import date
 
 # Example schemas (replace with your own):
 
@@ -37,6 +38,18 @@ class Product(BaseModel):
     price: float = Field(..., ge=0, description="Price in dollars")
     category: str = Field(..., description="Product category")
     in_stock: bool = Field(True, description="Whether product is in stock")
+
+# Personal Development App: Intentions ("ნებისწერა")
+class Intention(BaseModel):
+    """
+    Intentions collection schema
+    Collection name: "intention"
+    Represents a chosen direction or affirmation the user declares.
+    """
+    title: str = Field(..., min_length=2, max_length=120, description="Short statement of what you choose")
+    note: Optional[str] = Field(None, max_length=500, description="Optional elaboration or affirmation text")
+    category: Optional[str] = Field(None, description="Optional category, e.g., health, career, relationships")
+    target_date: Optional[date] = Field(None, description="Optional target date to aim for")
 
 # Add your own schemas here:
 # --------------------------------------------------
